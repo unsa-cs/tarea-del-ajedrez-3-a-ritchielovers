@@ -113,11 +113,15 @@ void garbageCollector(){
 int countMemoryEntries(){
   int count = 0;
   MemoryEntry* current = memoryList;
+  fprintf(stderr,"--------------------------------------------\n");
   while(current){
-    if(current->pointers)
+    if(current->pointers){
       count++;
+      fprintf(stderr,"[DEBUG] counted memory: %p\n",current->pointers->pointer);
+    }
     current = current->next;
   }
+  fprintf(stderr,"--------------------------------------------\n");
   fprintf(stderr, "[DEBUG] memory with references: %d\n", count);
   return count;
 }
