@@ -47,8 +47,6 @@ void memoryAlloc(void** pointer, size_t size){
   entry->pointers = createPointerNode(pointer);
   entry->next = memoryList;
   memoryList = entry;
-  fprintf(stderr, "Memoria: %p\n", entry->pointers->pointer);
-
 }
 
 // Función para agregar un puntero adicional que apunte a la misma memoria

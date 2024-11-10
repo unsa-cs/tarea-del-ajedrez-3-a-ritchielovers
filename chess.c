@@ -1,4 +1,4 @@
-//#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "chess.h"
 #include "gc.h"
@@ -6,8 +6,11 @@
 char** allocateMemory(int rows, size_t cols){
   char** newFig;
   memoryAlloc((void**)&newFig, sizeof(char*)*(rows + 1));
-  for(int i = 0; i < rows; i++)
+  fprintf(stderr,"[DEBUG] Memory for newFig : %p\n", &newFig);
+  for(int i = 0; i < rows; i++){
     memoryAlloc((void**)&newFig[i], sizeof(char)*(cols + 1));
+    fprintf(stderr, "[DEBUG] Memory for string : %p\n", &newFig[i]);
+  }
   return newFig;
 }
 
