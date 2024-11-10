@@ -66,6 +66,7 @@ void registerPointerToMemory(void** new_pointer, void* existing_memory){
 
 // Función para desvincular un puntero de la entrada de memoria correspondiente
 void unregisterPointer(void** pointer){
+  fprintf(stderr,"[DEBUG] Memory Register : %p\n",pointer);
   MemoryEntry* current = memoryList;
   while(current){
     PointerNode* prev = NULL;
@@ -76,7 +77,7 @@ void unregisterPointer(void** pointer){
           prev->next = ptr->next;
         else
           current->pointers = ptr->next;
-        fprintf(stderr,"[DEBUG] Free Memory : %p\n ",ptr->pointer);
+        fprintf(stderr,"[DEBUG] Free Memory : %p\n",ptr->pointer);
         free(ptr);
         return;
       }
@@ -85,6 +86,7 @@ void unregisterPointer(void** pointer){
     }
     current = current->next;
   }
+  fprintf(stderr,"[DEGUG] NoFree Memory \n");
 }
 
 // Función de recolección de basura que libera memoria sin referencias activas
