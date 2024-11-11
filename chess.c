@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "chess.h"
 #include "gc.h"
 
@@ -19,7 +20,7 @@ int sizeWidth(char **fig) {
     ++i;
   }
   return width;
-}
+} 
 
 void allocateMemory(char ***newFig, int rows, size_t cols){
   memoryAlloc((void**)newFig, sizeof(char*)*(rows + 1)); 
@@ -61,4 +62,27 @@ char** reverse(char** fig){
   newFig[rows] = 0;
   unlinkMemory(&newFig);
   return newFig;
+}
+
+char **join(char **figure1, char **figure2) {
+  int height1 = sizeHeight(figure1), height2 = sizeHeight(figure2);
+  assert(height1 == height2);
+  int figureWidth = sizeWidth(figure1) + sizeWidth(figure2);
+  char **newFigure = NULL;
+  allocateMemory(&newFigure,height1,figureWidth);
+
+  int i = 0;
+  while (figure1[i]) {
+    int k = 0, j = 0;
+    while (figure1[i][j]) {
+      newFigure[i][j] = figure1[i][j];
+      j++;
+    }
+    while (figure2[i][k]) {
+      newFigure[i][j++] = figure2[i][k++];
+    }
+    i++;
+  }
+  unlinkMemory(&newFigure);
+  return newFigure;
 }

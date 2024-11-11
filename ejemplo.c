@@ -4,6 +4,7 @@
 
 void display(){
   char** Pawn = reverse(pawn);
-  interpreter(Pawn);
+  char** U = join(Pawn,pawn);
+  interpreter(U);
   garbageCollector();
 }
