@@ -6,22 +6,20 @@
 char** allocateMemory(int rows, size_t cols){
   char** newFig;
   memoryAlloc((void**)&newFig, sizeof(char*)*(rows + 1)); 
-  //&newFig = &(**newFig)
   fprintf(stderr,"[DEBUG] Memory for newFig : %p\n", &newFig);
   for(int i = 0; i < rows; i++){
     memoryAlloc((void**)&newFig[i], sizeof(char)*(cols + 1));
-  //&newFig[i] == &(*(*(newFig[i])))
-    fprintf(stderr, "[DEBUG] Memory for string : %p\n", &newFig[i]);
+    //fprintf(stderr, "[DEBUG] Memory for string : %p\n", &newFig[i]);
   }
   return newFig;
 }
 
-void unlinkMemory(char** fig){ //fig = newFig (variables distintas)
+void unlinkMemory(char*** fig){ //fig = newFig (variables distintas)
   countMemoryEntries();
-  for(int i = 0; fig[i]; i++)
-    unregisterPointer((void**)&fig[i]); //fig[i] == newFig[i] (mismo contenido)
+  for(int i = 0; (*fig)[i]; i++)
+    unregisterPointer((void**)&(*fig)[i]); //fig[i] == newFig[i] (mismo contenido)
   countMemoryEntries();
-  unregisterPointer((void**)&fig); //  &fig != &newFig (memorias distintas)
+  unregisterPointer((void**)fig); //  &fig != &newFig (memorias distintas)
   countMemoryEntries();
 }
 
@@ -40,6 +38,6 @@ char** reverse(char** fig){
     newFig[i][cols] = 0;
   }
   newFig[rows] = 0;
-  unlinkMemory(newFig);
+  unlinkMemory(&newFig);
   return newFig;
 }
