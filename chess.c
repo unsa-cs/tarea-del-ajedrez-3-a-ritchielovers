@@ -3,15 +3,12 @@
 #include "chess.h"
 #include "gc.h"
 
-char** allocateMemory(int rows, size_t cols){
-  char** newFig;
-  memoryAlloc((void**)&newFig, sizeof(char*)*(rows + 1)); 
-  fprintf(stderr,"[DEBUG] Memory for newFig : %p\n", &newFig);
+void allocateMemory(char ***newFig, int rows, size_t cols){
+  memoryAlloc((void**)newFig, sizeof(char*)*(rows + 1)); 
+  fprintf(stderr,"[DEBUG] Memory for newFig : %p\n", newFig);
   for(int i = 0; i < rows; i++){
-    memoryAlloc((void**)&newFig[i], sizeof(char)*(cols + 1));
-    //fprintf(stderr, "[DEBUG] Memory for string : %p\n", &newFig[i]);
+    memoryAlloc((void**)&(*newFig)[i], sizeof(char)*(cols + 1)); 
   }
-  return newFig;
 }
 
 void unlinkMemory(char*** fig){ //fig = newFig (variables distintas)
@@ -29,8 +26,8 @@ char** reverse(char** fig){
   
   int cols = 0;
   while(fig[0][++cols]);
-
-  char** newFig = allocateMemory(rows, cols);
+  char **newFig = NULL;
+  allocateMemory(&newFig,rows, cols);
   fprintf(stderr, "Memory of newFig in reverse function: %p\n", &newFig);
   for(int i = 0; fig[i]; i++){
     for(int j = 0; fig[0][j]; j++)
