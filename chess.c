@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -85,4 +86,26 @@ char **join(char **figure1, char **figure2) {
   }
   unlinkMemory(&newFigure);
   return newFigure;
+}
+
+char **repeatH(char **figure, int repeater) {
+  int figureWidth = sizeWidth(figure) * repeater;
+  int figureHeight = sizeHeight(figure);
+
+  char** new_Figure = NULL;
+  allocateMemory(&new_Figure, figureHeight,figureWidth);
+  int i = 0;
+  while (figure[i]) {
+    int iterator = 0;
+    for (int j = 0; j < repeater; j++) {
+      int k = 0;
+      while (figure[i][k]) {
+        new_Figure[i][iterator++] = figure[i][k++];
+      }
+    }
+    new_Figure[i++][iterator] = 0;
+  }
+  new_Figure[i]=0;
+  unlinkMemory(&new_Figure);
+  return new_Figure;
 }

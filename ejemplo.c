@@ -4,7 +4,7 @@
 
 void display(){
   char** Pawn = reverse(pawn);
-  char** U = join(Pawn,pawn);
+  char** U = repeatH(join(Pawn,pawn),4);
   interpreter(U);
   garbageCollector();
 }
