@@ -28,10 +28,18 @@ char** reverse(char** fig){
   while(fig[0][++cols]);
   char **newFig = NULL;
   allocateMemory(&newFig,rows, cols);
-  fprintf(stderr, "Memory of newFig in reverse function: %p\n", &newFig);
+  //fprintf(stderr, "Memory of newFig in reverse function: %p\n", &newFig);
   for(int i = 0; fig[i]; i++){
-    for(int j = 0; fig[0][j]; j++)
-      newFig[i][j] = fig[i][j];
+    for(int j = 0; fig[0][j]; j++){
+      switch (fig[i][j]) {
+        case '_': newFig[i][j] = '='; break;
+        case '=': newFig[i][j] = '_'; break;
+        case '.': newFig[i][j] = '@'; break;
+        case '@': newFig[i][j] = '.'; break;
+        case '#': newFig[i][j] = '#'; break;
+        default: newFig[i][j] = ' '; break;
+      }
+    }
     newFig[i][cols] = 0;
   }
   newFig[rows] = 0;
