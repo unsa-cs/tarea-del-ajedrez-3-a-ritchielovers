@@ -88,6 +88,24 @@ char **join(char **figure1, char **figure2) {
   return newFigure;
 }
 
+char **up(char **figure1, char **figure2) {
+  int width1 = sizeWidth(figure1), width2 = sizeWidth(figure2);
+  assert(width1 == width2);
+  int height1 = sizeHeight(figure1);
+  int figureHeight = sizeHeight(figure2)+ sizeHeight(figure1);
+  char **newFigure = NULL;
+  allocateMemory(&newFigure,figureHeight,width1);
+  for (int i = 0; i < figureHeight-1; ++i) {
+    if (i < height1-1) {
+      newFigure[i] = figure1[i];
+    } else {
+      newFigure[i] = figure2[i - (height1-1)];
+    }
+  }
+  unlinkMemory(&newFigure);
+  return newFigure;
+}
+
 char **repeatH(char **figure, int repeater) {
   int figureWidth = sizeWidth(figure) * repeater;
   int figureHeight = sizeHeight(figure);
