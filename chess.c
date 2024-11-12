@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -126,4 +125,24 @@ char **repeatH(char **figure, int repeater) {
   new_Figure[i]=0;
   unlinkMemory(&new_Figure);
   return new_Figure;
+}
+
+char **repeatV(char **figure, int repeater) {
+  int height = sizeHeight(figure);
+  int figureHeight = height * repeater;
+  int figureWidth = sizeWidth(figure);
+
+  char **new_figure = NULL;
+  allocateMemory(&new_figure, figureHeight, figureWidth);
+
+  for (int i = 0; i < figureHeight; i++) {
+    for (int j = 0; j < figureWidth; j++) {
+      new_figure[i][j] = figure[i % height][j];
+    }
+      
+  }
+    
+  new_figure[figureHeight]=0;
+  unlinkMemory(&new_figure);
+  return new_figure;
 }

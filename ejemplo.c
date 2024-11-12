@@ -2,9 +2,10 @@
 #include "figures.h"
 #include "gc.h"
 
-void display(){
-  char** Pawn = reverse(pawn);
-  char** U = repeatH(up(Pawn,pawn),4);
-  interpreter(U);
+void display() {
+  char **Pawn = reverse(pawn);
+  char **U = repeatH(Pawn, 4);
+  char **J = repeatV(U, 3);
+  interpreter(J);
   garbageCollector();
 }
