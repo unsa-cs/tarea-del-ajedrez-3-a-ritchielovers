@@ -81,8 +81,10 @@ char **join(char **figure1, char **figure2) {
     while (figure2[i][k]) {
       newFigure[i][j++] = figure2[i][k++];
     }
+    newFigure[i][j]=0;
     i++;
   }
+  newFigure[i]=0;
   unlinkMemory(&newFigure);
   return newFigure;
 }
@@ -100,7 +102,9 @@ char **up(char **figure1, char **figure2) {
     } else {
       newFigure[i] = figure2[i - (height1-1)];
     }
+    newFigure[i][width1]=0;
   }
+  newFigure[figureHeight]=0;
   unlinkMemory(&newFigure);
   return newFigure;
 }
@@ -139,10 +143,33 @@ char **repeatV(char **figure, int repeater) {
     for (int j = 0; j < figureWidth; j++) {
       new_figure[i][j] = figure[i % height][j];
     }
-      
+    new_figure[i][figureWidth]=0; 
   }
     
   new_figure[figureHeight]=0;
+  unlinkMemory(&new_figure);
+  return new_figure;
+}
+
+char** superImpose(char** figure1, char** figure2) {
+  int width1 = sizeWidth(figure1), width2 = sizeWidth(figure2);
+  int height1 = sizeHeight(figure1), height2 = sizeHeight(figure2);
+  int figurewidth = width1 < width2 ? width1 : width2;
+  int figureheight = height1 < height2 ? height1 : height2;
+  char** new_figure = NULL;
+  allocateMemory(&new_figure, figureheight, figurewidth);
+
+  for (int i = 0; i < figureheight; i++) {
+    for (int j = 0; j < figurewidth; j++) {
+      if (figure1[i][j] == ' '){
+        new_figure[i][j] = figure2[i][j];
+      }else{
+        new_figure[i][j] = figure1[i][j];
+      }
+    }
+    new_figure[figurewidth]=0;
+  }
+  new_figure[figureheight]=0;
   unlinkMemory(&new_figure);
   return new_figure;
 }
