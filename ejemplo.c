@@ -2,14 +2,11 @@
 #include "figures.h"
 #include "gc.h"
 void display() {
-  char **Pawn = reverse(pawn);
-  //char **U = repeatH(Pawn, 4);
-  //char **J = repeatV(U, 3);
-  char** super = superImpose(Pawn,whiteSquare);
-  char** repetidorH = repeatH(super,2);
-  char** n = join(repetidorH,pawn);
-  char** upper = up(n,repeatH(Pawn,3));
-  char** n2 = repeatV(n,2);
-  interpreter(super);
+  char** Knight = reverse(knight);
+  char** super = superImpose(Knight,whiteSquare);
+  char** fila1 = repeatH(super,2);
+  char** fila2 = flipV(repeatH(super,2));
+  char** ejemplo = up(fila1, fila2);
+  interpreter(ejemplo);
   garbageCollector();
 }
