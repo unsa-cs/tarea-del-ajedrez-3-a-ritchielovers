@@ -4,10 +4,7 @@
 void display() {
   char** Knight = reverse(knight);
   char** super = superImpose(Knight,whiteSquare);
-  char** fila1 = repeatH(super,2);
-  char** fila2 = flipV(repeatH(super,2));
-  char** ejemplo = up(fila1, fila2);
-  char** fliHorizontal = flipH(ejemplo);
-  interpreter(fliHorizontal);
+  char** rotateLKnight = rotateL(Knight);
+  interpreter(rotateLKnight);
   garbageCollector();
 }
