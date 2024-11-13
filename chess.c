@@ -190,3 +190,18 @@ char **flipV(char **figure) {
   return newFigure;
 }
 
+char **flipH(char **figure) {
+  int figureWidth = sizeWidth(figure);
+  int figureHeight = sizeHeight(figure);
+  char **newFigure;
+  allocateMemory(&newFigure, figureHeight, figureWidth);
+  for (int i = 0; i < figureHeight; ++i) {
+    for (int j = 0; j < figureWidth; ++j) {
+      newFigure[i][j] = figure[figureHeight - 1 - i][j];
+    }
+    newFigure[i][figureWidth] = 0;
+  }
+  newFigure[figureHeight] = 0;
+  unlinkMemory(&newFigure);
+  return newFigure;
+}

@@ -7,6 +7,7 @@ void display() {
   char** fila1 = repeatH(super,2);
   char** fila2 = flipV(repeatH(super,2));
   char** ejemplo = up(fila1, fila2);
-  interpreter(ejemplo);
+  char** fliHorizontal = flipH(ejemplo);
+  interpreter(fliHorizontal);
   garbageCollector();
 }
