@@ -4,7 +4,7 @@
 void display() {
   char** Knight = reverse(knight);
   char** super = superImpose(Knight,whiteSquare);
-  char** rotateLKnight = rotateL(Knight);
+  char** rotateLKnight = rotateR(Knight);
   interpreter(rotateLKnight);
   garbageCollector();
 }

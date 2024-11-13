@@ -221,3 +221,20 @@ char **rotateL(char **figure) {
   unlinkMemory(&newFigure);
   return newFigure;
 }
+
+char **rotateR(char **figure) {
+  int figureWidth = sizeWidth(figure);
+  int figureHeight = sizeHeight(figure);
+  char **newFigure;
+  allocateMemory(&newFigure, figureWidth, figureHeight);
+  for (int i = 0; i < figureWidth; i++) {
+    for (int j = 0; j < figureHeight; j++) {
+      newFigure[i][j] = figure[figureHeight - 1 - j][i];
+    }
+    newFigure[i][figureHeight] = 0;
+  }
+  newFigure[figureWidth] = 0;
+  unlinkMemory(&newFigure);
+  return newFigure;
+}
+
