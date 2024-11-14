@@ -154,8 +154,18 @@ char **repeatV(char **figure, int repeater) {
 char** superImpose(char** figure1, char** figure2) {
   int width1 = sizeWidth(figure1), width2 = sizeWidth(figure2);
   int height1 = sizeHeight(figure1), height2 = sizeHeight(figure2);
-  int figurewidth = width1 < width2 ? width1 : width2;
-  int figureheight = height1 < height2 ? height1 : height2;
+  int figurewidth; 
+  if(width1 < width2){
+    figurewidth = width1;
+  }else{
+    figurewidth = width2;
+  }
+  int figureheight;
+  if(height1 < height2){
+    figureheight = height1;
+  }else{
+    figureheight = height2;
+  }
   char** new_figure = NULL;
   allocateMemory(&new_figure, figureheight, figurewidth);
 
